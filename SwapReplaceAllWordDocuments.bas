@@ -1,6 +1,6 @@
 Attribute VB_Name = "NewMacros"
-'Replaces a string with another and vice versa, switching the two.
-'The strings are defined in as arguments in the SwitchReplace function, which can be called multiple times
+'Replaces a string with another and vice versa, swapping the two.
+'The strings are defined in as arguments in the SwapReplace function, which can be called multiple times
 'This will be executed in all .doc .dot and .docx files in a folder including sub flders
 'The folder is defined in the strStartPath variable
 'This will replace strings even areas outside the body of the document
@@ -75,14 +75,14 @@ Sub OpenAllFiles(strPath As String)
             Set wdDoc = Documents.Open(FileName:=strPath & "\" & strName, _
             ReadOnly:=False, Format:=wdOpenFormatAuto)
              
-             'Call the replace method that will switch the first string with the second one
+             'Call the replace method that will Swap the first string with the second one
              'Can be called as many times as needed
-            SwitchReplace "Eng", "Embaixador", wdDoc
-            SwitchReplace "Teste1", "Teste2", wdDoc
-            SwitchReplace "l1", "l2", wdDoc
-            SwitchReplace "L1", "L2", wdDoc
-            SwitchReplace "loja 1", "loja 2", wdDoc
-            SwitchReplace "L 1", "L 2", wdDoc
+            SwapReplace "Eng", "Embaixador", wdDoc
+            SwapReplace "Teste1", "Teste2", wdDoc
+            SwapReplace "l1", "l2", wdDoc
+            SwapReplace "L1", "L2", wdDoc
+            SwapReplace "loja 1", "loja 2", wdDoc
+            SwapReplace "L 1", "L 2", wdDoc
              
              'we close saving changes
             wdDoc.Close wdSaveChanges
@@ -94,7 +94,7 @@ Sub OpenAllFiles(strPath As String)
 End Sub
  
  'the method that do the Replace
-Sub SwitchReplace(stringA As String, stringB As String, wdDoc As Document)
+Sub SwapReplace(stringA As String, stringB As String, wdDoc As Document)
     
     Selection.Find.ClearFormatting
     Selection.Find.Replacement.ClearFormatting
@@ -113,7 +113,7 @@ Sub SwitchReplace(stringA As String, stringB As String, wdDoc As Document)
         .Forward = True
     End With
         
-    'Switch the strings
+    'Swap the strings
     With Selection.Find
         .Text = stringA
         .Replacement.Text = "_REPLACETEMP_sadlkfj320jsdf_"
